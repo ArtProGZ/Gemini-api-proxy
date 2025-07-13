@@ -2162,18 +2162,23 @@ async def chat_completions(
 @app.get("/v1/models")
 async def list_models():
     """列出可用的模型"""
-    models = db.get_supported_models()
-
-    model_list = []
-    for model in models:
-        model_list.append({
-            "id": model,
-            "object": "model",
-            "created": int(time.time()),
-            "owned_by": "google"
-        })
-
-    return {"object": "list", "data": model_list}
+    return {
+        "object": "list",
+        "data": [
+            {
+                "id": "gemini-2.5-flash",
+                "object": "model",
+                "created": 1686935002,
+                "owned_by": "google"
+            },
+            {
+                "id": "gemini-2.5-pro",
+                "object": "model",
+                "created": 1686935002,
+                "owned_by": "google"
+            }
+        ]
+    }
 
 
 # 健康检测相关端点
